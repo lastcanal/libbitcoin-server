@@ -126,7 +126,8 @@ bool executor::do_initchain()
         LOG_INFO(LOG_SERVER) << format(BS_INITIALIZING_CHAIN) % directory;
 
         // Unfortunately we are limited to a choice of hardcoded chains.
-        auto testnet = metadata_.configured.network.identifier == 118034699u;
+        auto testnet = metadata_.configured.network.identifier == 118034699u ||
+            metadata_.configured.network.identifier == 4056470269u;
         auto regtest = metadata_.configured.network.identifier == 3669344250u;
         const auto genesis =
             regtest ? block::genesis_regtest() :
