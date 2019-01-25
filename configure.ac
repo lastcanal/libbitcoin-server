@@ -121,6 +121,17 @@ AC_ARG_WITH([console],
 AC_MSG_RESULT([$with_console])
 AM_CONDITIONAL([WITH_CONSOLE], [test x$with_console != xno])
 
+# Implement --with-webpage and declare WITH_WEBPAGE.
+#------------------------------------------------------------------------------
+AC_MSG_CHECKING([--with-webpage option])
+AC_ARG_WITH([webpage],
+    AS_HELP_STRING([--with-webpage],
+        [Compile webpage. @<:@default=yes@:>@]),
+    [with_webpage=$withval],
+    [with_webpage=yes])
+AC_MSG_RESULT([$with_webpage])
+AM_CONDITIONAL([WITH_WEBPAGE], [test x$with_webpage != xno])
+
 # Implement --enable-ndebug and define NDEBUG.
 #------------------------------------------------------------------------------
 AC_MSG_CHECKING([--enable-ndebug option])
@@ -172,6 +183,11 @@ AS_CASE([${with_tests}], [yes],
      AC_SUBST([boost_unit_test_framework_LIBS], [${BOOST_UNIT_TEST_FRAMEWORK_LIB}])
      AC_MSG_NOTICE([boost_unit_test_framework_LIBS : ${boost_unit_test_framework_LIBS}])],
     [AC_SUBST([boost_unit_test_framework_LIBS], [])])
+
+AC_CHECK_PROG([npm],[npm],[yes],[no])
+AS_CASE([${with_webpage}], [yes],
+    [AS_IF([test ${npm} = "no"],
+        [AC_MSG_ERROR([npm is required but was not found.])])])
 
 # Require bash-completion of at least version 2.0.0 and output ${bash_completion_CPPFLAGS/LIBS/PKG}.
 #------------------------------------------------------------------------------
@@ -321,6 +337,12 @@ AS_CASE([${CC}], [*],
 AS_CASE([${CC}], [*],
     [AX_CHECK_COMPILE_FLAG([-Wno-comment],
         [CXXFLAGS="$CXXFLAGS -Wno-comment"])])
+
+# Suppress overlength strings warning for default webpage.
+#------------------------------------------------------------------------------
+AS_CASE([${CC}], [*],
+    [AX_CHECK_COMPILE_FLAG([-Wno-overlength-strings],
+        [CXXFLAGS="$CXXFLAGS -Wno-overlength-strings"])])
 
 # Conflict in stdlib under clang. Enabled in clang only.
 #------------------------------------------------------------------------------

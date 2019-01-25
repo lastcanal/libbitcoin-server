@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <bitcoin/server/web/transaction_socket.hpp>
+#include <bitcoin/server/web/webpage.hpp>
 
 #include <bitcoin/protocol.hpp>
 #include <bitcoin/server/configuration.hpp>
@@ -38,7 +39,7 @@ static constexpr auto poll_interval_milliseconds = 100u;
 
 static const std::string transaction_socket_default
 {
-    "FIXME: Default Transaction Service page."
+    default_webpage()
 };
 
 transaction_socket::transaction_socket(zmq::context& context,

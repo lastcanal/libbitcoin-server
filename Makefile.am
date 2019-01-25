@@ -55,6 +55,7 @@ src_libbitcoin_server_la_SOURCES = \
     src/web/heartbeat_socket.cpp \
     src/web/query_socket.cpp \
     src/web/transaction_socket.cpp \
+    src/web/webpage.cpp \
     src/workers/authenticator.cpp \
     src/workers/notification_worker.cpp \
     src/workers/query_worker.cpp
@@ -130,7 +131,8 @@ include_bitcoin_server_web_HEADERS = \
     include/bitcoin/server/web/block_socket.hpp \
     include/bitcoin/server/web/heartbeat_socket.hpp \
     include/bitcoin/server/web/query_socket.hpp \
-    include/bitcoin/server/web/transaction_socket.hpp
+    include/bitcoin/server/web/transaction_socket.hpp \
+    include/bitcoin/server/web/webpage.hpp
 
 include_bitcoin_server_workersdir = ${includedir}/bitcoin/server/workers
 include_bitcoin_server_workers_HEADERS = \
@@ -146,6 +148,22 @@ dist_bash_completion_DATA = \
     data/bs
 
 endif BASH_COMPLETIONDIR
+
+# web => ${srcdir}/web/page.cpp
+#------------------------------------------------------------------------------
+if WITH_WEBPAGE
+
+include web/makefile.mk
+
+BUILT_SOURCES = include/bitcoin/server/web/webpage.hpp
+
+clean-local:
+	-rm -rf web/build
+
+distclean-local:
+	-rm -rf node_modules
+
+endif WITH_WEBPAGE
 
 # files => ${sysconfdir}/libbitcoin
 #------------------------------------------------------------------------------

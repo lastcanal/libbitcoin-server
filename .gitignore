@@ -27,3 +27,7 @@ build-libbitcoin-server
 console/bs
 libbitcoin-server.pc
 
+/src/web/webpage.cpp
+/web/build/
+npm-debug.log
+/node_modules/

@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <bitcoin/server/web/heartbeat_socket.hpp>
+#include <bitcoin/server/web/webpage.hpp>
 
 #include <algorithm>
 #include <cstdint>
@@ -35,7 +36,7 @@ using role = zmq::socket::role;
 
 static const std::string heartbeat_socket_default
 {
-    "FIXME: Default Heartbeat Service page."
+    default_webpage()
 };
 
 heartbeat_socket::heartbeat_socket(zmq::context& context, server_node& node,

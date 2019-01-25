@@ -16,9 +16,11 @@ environment:
     - configuration: StaticDebug
       platform: x64
       BOOST_UNIT_TEST_OPTIONS: "--run_test=* --show_progress=no --detect_memory_leak=0 --report_level=no --build_info=yes"
+      nodejs_version: "10"
     - configuration: StaticRelease
       platform: x64
       BOOST_UNIT_TEST_OPTIONS: "--run_test=* --show_progress=no --detect_memory_leak=0 --report_level=no --build_info=yes"
+      nodejs_version: "10"
 
 matrix:
   fast_finish: true

@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <bitcoin/server/web/block_socket.hpp>
+#include <bitcoin/server/web/webpage.hpp>
 
 #include <cstdint>
 #include <functional>
@@ -40,7 +41,7 @@ static constexpr auto poll_interval_milliseconds = 100u;
 
 static const std::string block_socket_default
 {
-    "FIXME: Default Block Service page."
+    default_webpage()
 };
 
 block_socket::block_socket(zmq::context& context, server_node& node,

@@ -21,6 +21,7 @@
 #include <bitcoin/protocol.hpp>
 #include <bitcoin/server/define.hpp>
 #include <bitcoin/server/server_node.hpp>
+#include <bitcoin/server/web/webpage.hpp>
 
 namespace libbitcoin {
 namespace server {
@@ -37,7 +38,7 @@ static constexpr auto poll_interval_milliseconds = 100u;
 
 static const std::string query_socket_default
 {
-    "FIXME: Default Query Service page."
+    default_webpage()
 };
 
 query_socket::query_socket(zmq::context& context, server_node& node,
